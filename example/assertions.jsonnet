@@ -29,7 +29,7 @@ test.suite {
         test.assertCookieDoesNotExist("test.assertCookieDoesNotExist", "caramel"),
         test.assertCookieEquals("test.assertCookieEquals", "chocolate", "chip"),
         test.assertCookieMatches("test.assertCookieMatches", "chocolate", "ch.p"),
-        test.assertCookieDoesNotMatch("test.assertCookieMatches", "chocolate", "ch.t"),
+        test.assertCookieDoesNotMatch("test.assertCookieDoesNotMatch", "chocolate", "ch.t"),
       ],
     },
   ],

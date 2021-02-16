@@ -1,4 +1,4 @@
-local test = import '../postman.libsonnet';
+local test = import '../../postman.libsonnet';
 
 test.suite {
   name: 'Request Body',
@@ -7,7 +7,7 @@ test.suite {
     test.case {
       name: 'Raw',
       request: test.POST('https://httpbin.org/anything') +
-               test.body.raw('hello!'),
+              test.body.raw('hello!'),
       tests: |||
         pm.test("Raw data", function () {
           pm.expect(pm.response.json().data).to.equal('hello!');
@@ -18,10 +18,10 @@ test.suite {
     test.case {
       name: 'Json',
       request: test.POST('https://httpbin.org/anything') +
-               test.body.json({
-                 'bohemian': 'rhapsody',
-                 'third': 'symphony'
-               }),
+              test.body.json({
+                'bohemian': 'rhapsody',
+                'third': 'symphony'
+              }),
       tests: |||
         pm.test("Json data", function () {
           pm.expect(pm.response.json().json.bohemian).to.equal('rhapsody');
@@ -33,10 +33,10 @@ test.suite {
     test.case {
       name: 'Urlencoded',
       request: test.POST('https://httpbin.org/anything') +
-               test.body.urlencoded([
-                 { key: 'easy', value: 'come' },
-                 { key: 'easy', value: 'go' },
-               ]),
+              test.body.urlencoded([
+                { key: 'easy', value: 'come' },
+                { key: 'easy', value: 'go' },
+              ]),
       tests: |||
         pm.test("Urlencoded data", function () {
           pm.expect(pm.response.json().form.easy[0]).to.equal('come');

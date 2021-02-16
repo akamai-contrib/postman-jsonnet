@@ -4,8 +4,8 @@ test.suite {
   name: "Postman Jsonnet",
 
   item: [
-    import './assertions.jsonnet',
-    import './request-body.jsonnet',
+    import './building-requests.jsonnet',
+    import './testing-responses.jsonnet',
     import './akamai.jsonnet',
   ],
 }

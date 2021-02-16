@@ -97,14 +97,26 @@ local constants = import './constants.libsonnet';
 
   /**
    * Adds a header to a request.
+   * If {name} is an object, then treats it as a mapping of header
+   * names to values.
    */
-  header(name, value):: {
-    header+: [
-      {
-        key: name,
-        value: value,
-      },
-    ],
+  header(name, value=null)::
+    if std.type(name) == 'object'
+    then {
+      header+: [
+        {
+          key: k,
+          value: name[k],
+        } for k in std.objectFields(name)
+      ],
+    }
+    else {
+      header+: [
+        {
+          key: name,
+          value: value,
+        },
+      ],
   },
 
   /**

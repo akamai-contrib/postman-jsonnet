@@ -28,4 +28,5 @@
 (import './src/suite.libsonnet') +
   (import './src/case.libsonnet') +
   (import './src/request.libsonnet') +
-  (import './src/assert.libsonnet')
+  (import './src/assert.libsonnet') +
+  (import './src/utils.libsonnet')

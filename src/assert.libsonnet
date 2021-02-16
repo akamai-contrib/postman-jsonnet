@@ -69,6 +69,28 @@
     regex: regex,
   }),
 
+  assertStatusCodeEquals(title, statusCode):: |||
+    (function (params) {
+      pm.test(params.title, function () {
+        pm.expect(pm.response.code).to.equal(params.statusCode);
+      });
+    })(%s);
+  ||| % std.manifestJson({
+    title: title,
+    statusCode: statusCode,
+  }),
+
+  assertStatusCodeDoesNotEqual(title, statusCode):: |||
+    (function (params) {
+      pm.test(params.title, function () {
+        pm.expect(pm.response.code).to.not.equal(params.statusCode);
+      });
+    })(%s);
+  ||| % std.manifestJson({
+    title: title,
+    statusCode: statusCode,
+  }),
+
   assertStatusCodeIsOneOf(title, statusCodes):: |||
     (function (params) {
       pm.test(params.title, function () {
@@ -89,6 +111,30 @@
   ||| % std.manifestJson({
     title: title,
     statusCodes: statusCodes,
+  }),
+
+  assertStatusCodeIsWithin(title, start, end):: |||
+    (function (params) {
+      pm.test(params.title, function () {
+        pm.expect(pm.response.code).to.be.within(params.start, params.end);
+      });
+    })(%s);
+  ||| % std.manifestJson({
+    title: title,
+    start: start,
+    end: end,
+  }),
+
+  assertStatusCodeIsNotWithin(title, start, end):: |||
+    (function (params) {
+      pm.test(params.title, function () {
+        pm.expect(pm.response.code).to.not.be.within(params.start, params.end);
+      });
+    })(%s);
+  ||| % std.manifestJson({
+    title: title,
+    start: start,
+    end: end,
   }),
 
   assertBodyMatches(title, regex):: |||

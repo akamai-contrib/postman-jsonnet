@@ -6,6 +6,7 @@ test.suite {
   item: [
     import './building-requests.jsonnet',
     import './testing-responses.jsonnet',
+    import './auth.jsonnet',
     import './akamai.jsonnet',
   ],
 }

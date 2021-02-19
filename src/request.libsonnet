@@ -30,35 +30,35 @@ local constants = import './constants.libsonnet';
   body:: {
     raw(value):: {
       body+: {
-        mode: "raw",
+        mode: 'raw',
         raw: value,
       },
     },
 
     json(value, contentType='application/json; charset=utf-8'):: {
       body+: {
-        mode: "raw",
+        mode: 'raw',
         raw: std.manifestJson(value),
       },
     } + $.header('Content-Type', contentType),
 
     urlencoded(kv):: {
       body+: {
-        mode: "urlencoded",
+        mode: 'urlencoded',
         urlencoded: [pair for pair in kv],
       },
     },
 
     formdata(formParameterList):: {
       body+: {
-        mode: "formdata",
+        mode: 'formdata',
         formdata: [formParameter for formParameter in formParameterList],
       },
     },
 
     file(name, content):: {
       body+: {
-        mode: "file",
+        mode: 'file',
         file: {
           src: name,
           content: content,
@@ -68,7 +68,7 @@ local constants = import './constants.libsonnet';
 
     graphql(data):: {
       body+: {
-        mode: "graphql",
+        mode: 'graphql',
         graphql: data,
       },
     },
@@ -107,7 +107,8 @@ local constants = import './constants.libsonnet';
         {
           key: k,
           value: name[k],
-        } for k in std.objectFields(name)
+        }
+        for k in std.objectFields(name)
       ],
     }
     else {
@@ -117,10 +118,10 @@ local constants = import './constants.libsonnet';
           value: value,
         },
       ],
-  },
+    },
 
   /**
    * Sets a cookie on the request.
    */
-  cookie(name, value):: self.header("Cookie", "%s=%s" % [name, value]),
+  cookie(name, value):: self.header('Cookie', '%s=%s' % [name, value]),
 }

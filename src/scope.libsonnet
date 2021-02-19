@@ -9,10 +9,10 @@
       {
         listen: 'prerequest',
         script: {
-          exec: me.pre
+          exec: me.pre,
         },
         type: 'text/javascript',
-      }
+      },
     ] + [
       {
         listen: 'test',
@@ -20,7 +20,7 @@
           exec: me.tests,
         },
         type: 'text/javascript',
-      }
+      },
     ],
   },
 

@@ -1,5 +1,3 @@
-  
-
 (import './postman.libsonnet') + {
   pragma:: {
     local _pragma(v) = $.header('Pragma', v),
@@ -17,8 +15,8 @@
     serialNo: _pragma('akamai-x-serial-no'),
     tapiocaTrace: _pragma('akamai-x-tapioca-trace'),
 
-    all:: std.foldl(function (a, b) a + b, std.objectValues(self), {}),
-    caching:: std.foldl(function (a, b) a + b, [
+    all:: std.foldl(function(a, b) a + b, std.objectValues(self), {}),
+    caching:: std.foldl(function(a, b) a + b, [
       self.getCacheTags,
       self.checkCacheable,
       self.cacheOn,
@@ -61,7 +59,7 @@
               }, {});
           },
         };
-      |||
+      |||,
     ],
   },
 

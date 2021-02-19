@@ -6,7 +6,7 @@ test.suite {
   item: [
     test.case {
       name: 'Simple',
-      request: test.GET('https://httpbin.org/anything?foo=bar&foo=baz#urlfragment')
+      request: test.GET('https://httpbin.org/anything?foo=bar&foo=baz#urlfragment'),
     },
 
     test.case {
@@ -17,10 +17,10 @@ test.suite {
         path: '/anything',
         hash: 'urlfragment',
         query: [
-          {key: 'foo', value: 'bar'},
-          {key: 'foo', value: 'baz'},
+          { key: 'foo', value: 'bar' },
+          { key: 'foo', value: 'baz' },
         ],
-      })
+      }),
     },
   ],
 }

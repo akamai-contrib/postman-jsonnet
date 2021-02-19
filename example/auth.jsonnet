@@ -1,7 +1,7 @@
-local test = import "../postman.libsonnet";
+local test = import '../postman.libsonnet';
 
 test.suite {
-  name: "Auth",
+  name: 'Auth',
 
   item: [
     import './auth/basic.jsonnet',

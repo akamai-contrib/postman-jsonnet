@@ -18,10 +18,10 @@ test.suite {
   item: [
 
     // basic auth can be added at the case level, in which case it applies only to that case
-    test.case + {
+    test.case {
       name: 'Authenticating case',
       request: test.GET('https://httpbin.org/headers')
-        + basicAuth,
+               + basicAuth,
       tests: [
         test.assertBodyMatches('test.assertBodyMatches(credentials base64)', b64),
       ],

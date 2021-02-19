@@ -7,7 +7,7 @@ test.suite {
     test.case {
       name: 'Response Body Assertions',
       request: test.POST('https://httpbin.org/anything') +
-              test.body.raw('hello!'),
+               test.body.raw('hello!'),
       tests: [
         test.assertBodyMatches('test.assertBodyMatches', 'hello'),
         test.assertBodyDoesNotMatch('test.assertBodyDoesNotMatch', 'iggityzaggetyzoom'),

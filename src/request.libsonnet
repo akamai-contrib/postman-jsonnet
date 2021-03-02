@@ -1,4 +1,5 @@
 local constants = import './constants.libsonnet';
+local auth = import './auth.libsonnet';
 
 {
   request:: {
@@ -76,24 +77,10 @@ local constants = import './constants.libsonnet';
 
   /**
    * Adds basic authentication parameters to a suite or a request.
+   *
+   * @deprecated use `test.auth.basic(user, password)` instead.
    */
-  basicAuth(user='{{user}}', password='{{password}}'):: {
-    auth: {
-      type: 'basic',
-      basic: [
-        {
-          key: 'password',
-          value: password,
-          type: 'string',
-        },
-        {
-          key: 'username',
-          value: user,
-          type: 'string',
-        },
-      ],
-    },
-  },
+  basicAuth(user='{{user}}', password='{{password}}'):: auth.auth.basic(user, password),
 
   /**
    * Adds a header to a request.

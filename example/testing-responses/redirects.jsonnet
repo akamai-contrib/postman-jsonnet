@@ -1,5 +1,8 @@
 local test = import '../../postman.libsonnet';
 
+// https://github.com/postmanlabs/httpbin/issues/617
+// redirect-to endpoint is broken on main endpoint, which is why we are using an alt mirror
+
 test.suite {
   name: 'Redirects Assertions',
 

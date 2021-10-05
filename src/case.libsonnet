@@ -7,12 +7,16 @@ local scope = import './scope.libsonnet';
     // by default, disable cookies
     disableCookies:: true,
 
+    // by default, do not chase redirects
+    followRedirects:: false,
+
     name: error 'name is required',
 
     request: error 'request is required',
 
     protocolProfileBehavior: {
       disableCookies: me.disableCookies,
+      followRedirects: me.followRedirects,
     },
 
     event+: [

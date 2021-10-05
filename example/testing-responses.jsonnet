@@ -12,5 +12,6 @@ test.suite {
     import './testing-responses/headers.jsonnet',
     import './testing-responses/cookies.jsonnet',
     import './testing-responses/body.jsonnet',
+    import './testing-responses/redirects.jsonnet',
   ],
 }

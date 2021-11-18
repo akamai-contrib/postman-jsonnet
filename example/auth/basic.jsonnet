@@ -39,6 +39,15 @@ test.suite {
             test.assertBodyMatches('test.assertBodyMatches(credentials base64)', b64),
           ],
         },
+
+        test.case {
+          name: 'Case in authenticating suite without auth',
+          request: test.GET('https://httpbin.org/headers')
+                   + test.auth.noauth(),
+          tests: [
+            test.assertBodyDoesNotMatch('test.assertBodyMatches(credentials base64)', b64),
+          ],
+        },
       ],
     },
   ],

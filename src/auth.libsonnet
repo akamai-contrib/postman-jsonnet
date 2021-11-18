@@ -4,8 +4,8 @@
    */
   auth:: {
     /**
-    * Adds basic authentication parameters.
-    */
+     * Adds basic authentication parameters.
+     */
     basic(user='{{user}}', password='{{password}}'):: {
       auth: {
         type: 'basic',
@@ -21,6 +21,15 @@
             type: 'string',
           },
         ],
+      },
+    },
+
+    /**
+     * Handy for explicitly disabling auth for a given request.
+     */
+    noauth():: {
+      auth: {
+        type: 'noauth',
       },
     },
   },

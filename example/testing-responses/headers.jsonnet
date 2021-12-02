@@ -6,7 +6,7 @@ test.suite {
   item: [
     test.case {
       name: 'Header assertions',
-      request: test.GET('https://httpbin.org/response-headers?X-Wing=gold'),
+      request: test.GET('https://{{httpbin}}/response-headers?X-Wing=gold'),
       tests: [
         test.assertHeaderExists('test.assertHeaderExists', 'X-Wing'),
         test.assertHeaderDoesNotExist('test.assertHeaderDoesNotExist', 'Tie-Fighter'),

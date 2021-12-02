@@ -6,7 +6,7 @@ test.suite {
   item: [
     test.case {
       name: 'Cookie assertions',
-      request: test.GET('https://httpbin.org/response-headers?Set-Cookie=chocolate%3Dchip'),
+      request: test.GET('https://{{httpbin}}/response-headers?Set-Cookie=chocolate%3Dchip'),
 
       // by default, we disable cookies; if we need to work with them, set this to false
       disableCookies: false,

@@ -7,7 +7,7 @@ test.suite {
     test.case {
       name: 'Status Code assertions',
 
-      request: test.GET('https://httpbin.org/status/200'),
+      request: test.GET('https://{{httpbin}}/status/200'),
 
       tests: [
         test.assertStatusCodeEquals('test.assertStatusCodeEquals', 200),

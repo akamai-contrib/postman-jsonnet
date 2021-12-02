@@ -6,7 +6,7 @@ test.suite {
   item: [
     test.case {
       name: 'Raw',
-      request: test.POST('https://httpbin.org/anything') +
+      request: test.POST('https://{{httpbin}}/anything') +
                test.body.raw('hello!'),
       tests: |||
         pm.test("Raw data", function () {
@@ -17,7 +17,7 @@ test.suite {
 
     test.case {
       name: 'Json',
-      request: test.POST('https://httpbin.org/anything') +
+      request: test.POST('https://{{httpbin}}/anything') +
                test.body.json({
                  bohemian: 'rhapsody',
                  third: 'symphony',
@@ -32,7 +32,7 @@ test.suite {
 
     test.case {
       name: 'Urlencoded',
-      request: test.POST('https://httpbin.org/anything') +
+      request: test.POST('https://{{httpbin}}/anything') +
                test.body.urlencoded([
                  { key: 'easy', value: 'come' },
                  { key: 'easy', value: 'go' },

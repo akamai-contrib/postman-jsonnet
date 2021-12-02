@@ -6,14 +6,14 @@ test.suite {
   item: [
     test.case {
       name: 'Simple',
-      request: test.GET('https://httpbin.org/anything?foo=bar&foo=baz#urlfragment'),
+      request: test.GET('https://{{httpbin}}/anything?foo=bar&foo=baz#urlfragment'),
     },
 
     test.case {
       name: 'Structured',
       request: test.GET({
         protocol: 'https',
-        host: 'httpbin.org',
+        host: '{{httpbin}}',
         path: '/anything',
         hash: 'urlfragment',
         query: [

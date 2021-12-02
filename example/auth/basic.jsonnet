@@ -20,7 +20,7 @@ test.suite {
     // basic auth can be added at the case level, in which case it applies only to that case
     test.case {
       name: 'Authenticating case',
-      request: test.GET('https://httpbin.org/headers')
+      request: test.GET('https://{{httpbin}}/headers')
                + basicAuth,
       tests: [
         test.assertBodyMatches('test.assertBodyMatches(credentials base64)', b64),
@@ -34,7 +34,7 @@ test.suite {
       item: [
         test.case {
           name: 'Case in authenticating suite',
-          request: test.GET('https://httpbin.org/headers'),
+          request: test.GET('https://{{httpbin}}/headers'),
           tests: [
             test.assertBodyMatches('test.assertBodyMatches(credentials base64)', b64),
           ],
@@ -42,7 +42,7 @@ test.suite {
 
         test.case {
           name: 'Case in authenticating suite without auth',
-          request: test.GET('https://httpbin.org/headers')
+          request: test.GET('https://{{httpbin}}/headers')
                    + test.auth.noauth(),
           tests: [
             test.assertBodyDoesNotMatch('test.assertBodyMatches(credentials base64)', b64),

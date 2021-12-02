@@ -6,11 +6,11 @@ test.suite {
   item: [
     test.case {
       name: 'GET',
-      request: test.GET('https://httpbin.org/anything'),
+      request: test.GET('https://{{httpbin}}/anything'),
     },
     test.case {
       name: 'HEAD',
-      request: test.HEAD('https://httpbin.org/anything'),
+      request: test.HEAD('https://{{httpbin}}/anything'),
     },
     test.case {
       // most common methods have a convenience constructor,
@@ -18,7 +18,7 @@ test.suite {
       name: 'DAV : PROPFIND',
       request: {
         method: 'PROPFIND',
-        url: 'https://httpbin.org/anything',
+        url: 'https://{{httpbin}}/anything',
       },
     },
   ],

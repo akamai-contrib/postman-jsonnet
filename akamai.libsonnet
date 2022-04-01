@@ -28,38 +28,7 @@
 
   suite+:: {
     pre+: [
-      |||
-        /**
-        * Return all values of the given response header as an Array.
-        *
-        * Postman does not yet have a simple API for retrieving multiple-instance response
-        * headers without a workaround:
-        * https://github.com/postmanlabs/postman-app-support/issues/6143
-        */
-        function getResponseHeaderValues(response, name) {
-          return response.headers
-            .filter(function (header) { return String(header.key).toLowerCase() === name; })
-            .map(function (header) { return header.valueOf(); });
-        }
-
-        akamai = {
-          /**
-          * Parse and return the values of x-akamai-session-info values from the response,
-          * as an object.
-          */
-          extractedValues(response) {
-            let pat = /^name=([^;]*); value=([^;]*).*$/;
-            return getResponseHeaderValues(response, "x-akamai-session-info")
-              .reduce(function (vars, value) {
-                if (pat.test(value)) {
-                  let [res, k, v] = value.match(pat);
-                  vars[k] = v;
-                }
-                return vars;
-              }, {});
-          },
-        };
-      |||,
+      importstr './src/akamai.js',
     ],
   },
 

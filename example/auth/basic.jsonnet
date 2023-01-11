@@ -45,7 +45,7 @@ test.suite {
           request: test.GET('https://{{httpbin}}/headers')
                    + test.auth.noauth(),
           tests: [
-            test.assertBodyDoesNotMatch('test.assertBodyMatches(credentials base64)', b64),
+            test.assertBodyDoesNotMatch('test.assertBodyDoesNotMatch(credentials base64)', b64),
           ],
         },
       ],

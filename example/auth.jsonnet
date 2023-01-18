@@ -5,5 +5,6 @@ test.suite {
 
   item: [
     import './auth/basic.jsonnet',
+    import './auth/edgegrid.jsonnet',
   ],
 }

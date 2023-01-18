@@ -1,19 +1,20 @@
 local test = import '../../postman.libsonnet';
 
-// in this example, we hardcode the credentials;
-// in real life, you should instead use Postman variables, e.g.:
+// In this example, we hardcode the credentials because passing for convenience and clarity;
+// In real life, you should use the default constructor:
 //
-//   local credentials = { user: '{{user}}', password: '{{password}}' };
+//   local auth = test.auth.basic();
 //
-// and then, pass them on the command line:
+// This will set the credentials to '{{user}}', '{{password}}'
+// which will allow you to then pass them as variables:
 //
-//  newman run --env-var user=ynohat --env-var password=secret suite.json
+//  newman run --env-var user=xyz --env-var password=xyz suite.json
 local credentials = { user: 'ynohat', password: 'secret' };
 local basicAuth = test.auth.basic(user=credentials.user, password=credentials.password);
 local b64 = std.base64('%(user)s:%(password)s' % credentials);
 
 test.suite {
-  name: 'Auth',
+  name: 'Basic Auth',
 
   item: [
 

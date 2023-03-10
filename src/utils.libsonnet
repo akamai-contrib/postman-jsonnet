@@ -9,5 +9,7 @@
     encodeQuery(params)::
       local fmtParam(p) = '%s=%s' % [self.escapeString(p), self.escapeString(params[p])];
       std.join('&', std.map(fmtParam, std.objectFields(params))),
+
+    delay(ms):: 'setTimeout(function(){}, %s);' % std.manifestJson(ms)
   },
 }

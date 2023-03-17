@@ -20,5 +20,6 @@ test.suite {
     import './testing-responses.jsonnet',
     import './auth.jsonnet',
     import './akamai.jsonnet',
+    import './delaying-requests.jsonnet',
   ],
 }

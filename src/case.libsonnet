@@ -10,6 +10,9 @@ local scope = import './scope.libsonnet';
     // by default, do not chase redirects
     followRedirects:: false,
 
+    // by default, do not add delay
+    delay:: null,
+
     name: error 'name is required',
 
     request: error 'request is required',
@@ -31,6 +34,15 @@ local scope = import './scope.libsonnet';
         },
         type: 'text/javascript',
       },
-    ],
+    ] + (
+      // add request delay
+      if (std.type(me.delay) == 'number')
+      then [{
+        listen: 'prerequest',
+        script: 'setTimeout(function(){}, %d);' % me.delay,
+        type: 'text/javascript',
+      }]
+      else []
+    ),
   },
 }

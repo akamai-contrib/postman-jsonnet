@@ -47,24 +47,6 @@ test.suite {
       ],
     },
 
-    // This test shows how to add a delay before the execution of a test
-    // This can be useful, if previous tests or actions require a delay before the next the can be executed
-    test.case {
-      name: 'Delay of test execution by 3 seconds',
-      pre:: [test.utils.delay(3000)], // Add a delay of 3s before the test is executed
-      request: test.GET({
-        protocol: 'https',
-        host: 'httpbin.org',
-        path: '/response-headers',
-        query: [
-          { key: 'x-cache', value: 'TCP_MISS' },
-        ],
-      }) + test.pragma.cacheOn, // see the list in akamai.libsonnet
-      tests: [
-        test.assertHeaderMatches('Object not delivered from cache', 'x-cache', 'TCP_MISS'),
-      ],
-    },
-
     // This test shows how an EdgeAuth token can be generated as part of a test suite
     // to test endpoints that use this auth method.
     test.case {

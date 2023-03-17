@@ -30,5 +30,4 @@
 (import './src/request.libsonnet') +
 (import './src/assert.libsonnet') +
 (import './src/utils.libsonnet') +
-(import './src/auth.libsonnet') +
-(import './src/delay.libsonnet')
+(import './src/auth.libsonnet')

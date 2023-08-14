@@ -51,6 +51,7 @@ test.suite {
 
       tests: [
         test.assertCookieAttributeExists('test.assertCookieAttributeExists value', 'silver', ''),
+        test.assertCookieExists('test.assertCookieExists', 'silver'),
         test.assertCookieAttributeExists('test.assertCookieAttributeExists Domain', 'silver', 'Domain'),
         test.assertCookieAttributeExists('test.assertCookieAttributeExists Path', 'silver', 'Path'),
         test.assertCookieAttributeExists('test.assertCookieAttributeExists Max-Age', 'silver', 'Max-Age'),
@@ -64,6 +65,7 @@ test.suite {
 
         //When pseudo attribute cookie value in not in Set-Cookie, it is empty string
         test.assertCookieAttributeEquals('test.assertCookieAttributeEquals value', 'silver', '', ''),
+        test.assertCookieEquals('test.assertCookieEquals', 'silver', ''),
         //When Domain is not in Set-Cookie, it matches is hostname in URL
         test.assertCookieAttributeEquals('test.assertCookieAttributeEquals Domain', 'silver', 'Domain', 'httpbin.org'),
         //When Path is not in Set-Cookie, it matches is /
@@ -72,16 +74,19 @@ test.suite {
         test.assertCookieAttributeEquals('test.assertCookieAttributeEquals Max-Age', 'silver', 'Max-Age', 0),
 
         test.assertCookieAttributeDoesNotEqual('test.assertCookieAttributeDoesNotEqual value', 'silver', '', 'other'),
+        test.assertCookieDoesNotEqual('test.assertCookieEquals', 'silver', 'other'),
         test.assertCookieAttributeDoesNotEqual('test.assertCookieAttributeDoesNotEqual Domain', 'silver', 'Domain', 'other'),
         test.assertCookieAttributeDoesNotEqual('test.assertCookieAttributeDoesNotEqual Path', 'silver', 'Path', 'other'),
         test.assertCookieAttributeDoesNotEqual('test.assertCookieAttributeDoesNotEqual Max-Age', 'silver', 'Max-Age', 'other'),
 
         test.assertCookieAttributeMatches('test.assertCookieAttributeMatches value', 'silver', '', '^$'),
+        test.assertCookieMatches('test.assertCookieMatches', 'silver', '^$'),
         test.assertCookieAttributeMatches('test.assertCookieAttributeMatches Domain', 'silver', 'Domain', '.*'),
         test.assertCookieAttributeMatches('test.assertCookieAttributeMatches Path', 'silver', 'Path', '/'),
         test.assertCookieAttributeMatches('test.assertCookieAttributeMatches Max-Age', 'silver', 'Max-Age', '0'),
 
         test.assertCookieAttributeDoesNotMatch('test.assertCookieAttributeDoesNotMatch value', 'silver', '', 'other'),
+        test.assertCookieDoesNotMatch('test.assertCookieDoesNotMatch', 'silver', 'other'),
         test.assertCookieAttributeDoesNotMatch('test.assertCookieAttributeDoesNotMatch Domain', 'silver', 'Domain', 'other'),
         test.assertCookieAttributeDoesNotMatch('test.assertCookieAttributeDoesNotMatch Path', 'silver', 'Path', 'other'),
         test.assertCookieAttributeDoesNotMatch('test.assertCookieAttributeDoesNotMatch Max-Age', 'silver', 'Max-Age', 'other'),
@@ -170,7 +175,7 @@ test.suite {
         test.assertCookieAttributeDoesNotMatch('test.assertCookieAttributeDoesNotMatch attribute-name', 'gold', 'attribute-name', 'other'),
       ],
     },
-        test.case {
+    test.case {
       name: 'Cookie attribute assertions - Value of Expires is lowered according to Max-Age',
       request: test.GET('https://{{httpbin}}/response-headers?Set-Cookie=copper=chip%3BExpires%3DSun%2C%2001-Jan-2999%2001%3A01%3A00%20GMT%3BMax-Age%3D1'),
 
@@ -183,6 +188,73 @@ test.suite {
         test.assertCookieAttributeMatches('test.assertCookieAttributeMatches Max-Age', 'copper', 'Max-Age', '1'),
       ],
     },
+    test.case {
+      name: 'Cookie attribute assertions - assertCookieAttributeExists',
+      request: test.GET('https://{{httpbin}}/response-headers?Set-Cookie=copper=chip%3BExpires%3DSun%2C%2001-Jan-2999%2001%3A01%3A00%20GMT%3BMax-Age%3D1'),
+
+      // by default, we disable cookies; if we need to work with them, set this to false
+      disableCookies: false,
+
+      tests: [
+        test.assertCookieAttributeExists('test.assertCookieAttributeExists value', 'silver', ''),
+      ],
+    },
+    test.case {
+      name: 'Cookie attribute assertions - assertCookieAttributeDoesNotExist',
+      request: test.GET('https://{{httpbin}}/response-headers?Set-Cookie=copper=chip%3BExpires%3DSun%2C%2001-Jan-2999%2001%3A01%3A00%20GMT%3BMax-Age%3D1'),
+
+      // by default, we disable cookies; if we need to work with them, set this to false
+      disableCookies: false,
+
+      tests: [
+        test.assertCookieAttributeDoesNotExist('test.assertCookieAttributeDoesNotExist value', 'absent', ''),
+      ],
+    },
+    test.case {
+      name: 'Cookie attribute assertions - assertCookieAttributeEquals',
+      request: test.GET('https://{{httpbin}}/response-headers?Set-Cookie=copper=chip%3BExpires%3DSun%2C%2001-Jan-2999%2001%3A01%3A00%20GMT%3BMax-Age%3D1'),
+
+      // by default, we disable cookies; if we need to work with them, set this to false
+      disableCookies: false,
+
+      tests: [
+        test.assertCookieAttributeEquals('test.assertCookieAttributeEquals value', 'silver', '', ''),
+      ],
+    },
+    test.case {
+      name: 'Cookie attribute assertions - assertCookieAttributeDoesNotEqual',
+      request: test.GET('https://{{httpbin}}/response-headers?Set-Cookie=copper=chip%3BExpires%3DSun%2C%2001-Jan-2999%2001%3A01%3A00%20GMT%3BMax-Age%3D1'),
+
+      // by default, we disable cookies; if we need to work with them, set this to false
+      disableCookies: false,
+
+      tests: [
+        test.assertCookieAttributeDoesNotEqual('test.assertCookieAttributeDoesNotEqual value', 'silver', '', 'other'),
+      ],
+    },
+    test.case {
+      name: 'Cookie attribute assertions - assertCookieAttributeMatches',
+      request: test.GET('https://{{httpbin}}/response-headers?Set-Cookie=copper=chip%3BExpires%3DSun%2C%2001-Jan-2999%2001%3A01%3A00%20GMT%3BMax-Age%3D1'),
+
+      // by default, we disable cookies; if we need to work with them, set this to false
+      disableCookies: false,
+
+      tests: [
+        test.assertCookieAttributeMatches('test.assertCookieAttributeMatches value', 'silver', '', '^$'),
+      ],
+    },
+    test.case {
+      name: 'Cookie attribute assertions - assertCookieAttributeDoesNotMatch',
+      request: test.GET('https://{{httpbin}}/response-headers?Set-Cookie=copper=chip%3BExpires%3DSun%2C%2001-Jan-2999%2001%3A01%3A00%20GMT%3BMax-Age%3D1'),
+
+      // by default, we disable cookies; if we need to work with them, set this to false
+      disableCookies: false,
+
+      tests: [
+        test.assertCookieAttributeDoesNotMatch('test.assertCookieAttributeDoesNotMatch Expires', 'copper', 'Expires', '.*2999.*'),
+      ],
+    },
+
     test.case {
       name: 'Cookie assertions - cookies set in previous test cases are still in jar',
       request: test.GET('https://{{httpbin}}/response-headers'),

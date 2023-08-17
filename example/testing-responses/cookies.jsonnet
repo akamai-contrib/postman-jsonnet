@@ -15,7 +15,7 @@ test.suite {
         test.assertCookieExists('test.assertCookieExists', 'chocolate'),
         test.assertCookieDoesNotExist('test.assertCookieDoesNotExist', 'caramel'),
         test.assertCookieEquals('test.assertCookieEquals', 'chocolate', 'chip'),
-        test.assertCookieDoesNotEqual('test.assertCookieEquals', 'chocolate', 'chop'),
+        test.assertCookieDoesNotEqual('test.assertCookieDoesNotEqual', 'chocolate', 'chop'),
         test.assertCookieMatches('test.assertCookieMatches', 'chocolate', 'ch.p'),
         test.assertCookieDoesNotMatch('test.assertCookieDoesNotMatch', 'chocolate', 'ch.t'),
       ],

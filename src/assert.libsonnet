@@ -232,7 +232,7 @@
 
   assertCookieAttributeExists(title, name, attribute):: |||
     (function (params) {
-      let attributeValue=utils.getCookieAttributeValue(params.name, params.attribute);
+      const attributeValue=utils.getCookieAttributeValue(pm.cookies, params.name, params.attribute);
       pm.test(params.title, function () {
         pm.expect(attributeValue).to.not.be.undefined;
       });
@@ -244,11 +244,8 @@
   }),
   assertCookieAttributeDoesNotExist(title, name, attribute):: |||
     (function (params) {
-      console.log("before get value");
-      const attributeValue=utils.getCookieAttributeValue(params.name, params.attribute);
-      console.log("before test");
+      const attributeValue=utils.getCookieAttributeValue(pm.cookies, params.name, params.attribute);
       pm.test(params.title, function () {
-        console.log("before expect");
         pm.expect(attributeValue).to.be.undefined;
       });
     })(%s);
@@ -259,10 +256,10 @@
   }),
   assertCookieAttributeEquals(title, name, attribute, value):: |||
     (function (params) {
-      const attributeValue=utils.getCookieAttributeValue(params.name, params.attribute);
+      const attributeValue=utils.getCookieAttributeValue(pm.cookies, params.name, params.attribute);
       pm.test(params.title, function () {
-        pm.expect(attributeValue).to.not.be.undefined);
-        pm.expect(attributeValue).to.equal(params.value;
+        pm.expect(attributeValue).to.not.be.undefined;
+        pm.expect(attributeValue).to.equal(params.value);
       });
     })(%s);
   ||| % std.manifestJson({
@@ -273,10 +270,10 @@
   }),
   assertCookieAttributeDoesNotEqual(title, name, attribute, value):: |||
     (function (params) {
-      const attributeValue=utils.getCookieAttributeValue(params.name, params.attribute);
+      const attributeValue=utils.getCookieAttributeValue(pm.cookies, params.name, params.attribute);
       pm.test(params.title, function () {
-        pm.expect(attributeValue).to.not.be.undefined);
-        pm.expect(attributeValue).to.not.eql(params.value;
+        pm.expect(attributeValue).to.not.be.undefined;
+        pm.expect(attributeValue).to.not.equal(params.value);
       });
     })(%s);
   ||| % std.manifestJson({
@@ -287,7 +284,7 @@
   }),
   assertCookieAttributeMatches(title, name, attribute, regex):: |||
     (function (params) {
-      const attributeValue=utils.getCookieAttributeValue(params.name, params.attribute);
+      const attributeValue=utils.getCookieAttributeValue(pm.cookies, params.name, params.attribute);
       pm.test(params.title, function () {
         pm.expect(attributeValue).to.not.be.undefined;
         pm.expect(attributeValue).to.match(new RegExp(params.regex));
@@ -299,9 +296,9 @@
     attribute: attribute,
     regex: regex,
   }),
-  assertCookieAttributeDoesNotMatch( title, name, attribute, regex):: |||
+  assertCookieAttributeDoesNotMatch(title, name, attribute, regex):: |||
     (function (params) {
-      const attributeValue=utils.getCookieAttributeValue(params.name, params.attribute);
+      const attributeValue=utils.getCookieAttributeValue(pm.cookies, params.name, params.attribute);
       pm.test(params.title, function () {
         pm.expect(attributeValue).to.not.be.undefined;
         pm.expect(attributeValue).to.not.match(new RegExp(params.regex));

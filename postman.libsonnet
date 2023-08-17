@@ -25,16 +25,15 @@
 // Using dynamic variables (cache buster, random color, bank card number, guid, etc...)
 // https://learning.postman.com/docs/sending-requests/variables/#using-dynamic-variables
 
-{
-  suite+:: {
-    pre+: [
-      importstr './src/js/utils.js',
-    ],
-  },
-} +
 (import './src/suite.libsonnet') +
 (import './src/case.libsonnet') +
 (import './src/request.libsonnet') +
 (import './src/assert.libsonnet') +
 (import './src/utils.libsonnet') +
-(import './src/auth.libsonnet')
+(import './src/auth.libsonnet') + {
+  suite+:: {
+    pre+: [
+      importstr './src/js/utils.js',
+    ],
+  },
+}

@@ -28,7 +28,7 @@
 
   suite+:: {
     pre+: [
-      importstr './src/akamai.js',
+      importstr './src/js/akamai.js',
     ],
   },
 

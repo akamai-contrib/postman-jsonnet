@@ -6,8 +6,10 @@
       local escapeChar(char) = if std.member(excludedChars, char) || std.member(allowedChars, char) then char else utf8(char);
       std.join('', std.map(escapeChar, std.stringChars(str))),
 
-    encodeQuery(params)::
-      local fmtParam(p) = '%s=%s' % [self.escapeString(p), self.escapeString(params[p])];
-      std.join('&', std.map(fmtParam, std.objectFields(params))),
+    encodeQuery(params, separator='&')::
+      local fmtParam(p) = if params[p] != true
+        then '%s=%s' % [self.escapeString(p), self.escapeString(params[p])]
+        else '%s' % [self.escapeString(p)];
+      std.join(separator, std.map(fmtParam, std.objectFields(params))), 
   },
 }

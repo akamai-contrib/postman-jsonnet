@@ -13,6 +13,9 @@ test.suite {
         query: [
           { key: 'x-akamai-session-info', value: 'name=RO_ENABLED; value=false' },
           { key: 'x-akamai-session-info', value: 'name=AKA_PM_CACHEABLE_OBJECT; value=true' },
+          { key: 'x-akamai-session-info', value: 'name=PMUSER_EXTRACTED_1; value=key1=value1; key2=value2; full_location_id=Name1; separator=%s' % test.utils.escapeString('%3d') },
+          { key: 'x-akamai-session-info', value: 'name=PMUSER_EXTRACTED_2; value=key3=value3; key4=value4; full_location_id=Name2' },
+          
         ],
       }) + test.pragma.getExtractedValues,
       tests: [
@@ -20,6 +23,8 @@ test.suite {
         test.assertExtractedValueExists('test.assertExtractedValueExists', 'AKA_PM_CACHEABLE_OBJECT'),
         test.assertExtractedValueDoesNotExist('test.assertExtractedValueDoesNotExist', 'FAKE_VARIABLE'),
         test.assertExtractedValueEquals('test.assertExtractedValueEquals', 'RO_ENABLED', 'false'),
+        test.assertExtractedValueEquals('test.assertExtractedValueEquals with full_location_id', 'PMUSER_EXTRACTED_1', 'key1=value1; key2=value2'),
+        test.assertExtractedValueEquals('test.assertExtractedValueEquals with full_location_id and separator', 'PMUSER_EXTRACTED_2', 'key3=value3; key4=value4'),
         test.assertExtractedValueDoesNotEqual('test.assertExtractedValueDoesNotEqual', 'RO_ENABLED', 'true'),
         test.assertExtractedValueMatches('test.assertExtractedValueMatches', 'RO_ENABLED', 'f.lse'),
         test.assertExtractedValueDoesNotMatch('test.assertExtractedValueDoesNotMatch', 'RO_ENABLED', 'tr.e'),

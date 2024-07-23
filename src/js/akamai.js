@@ -203,7 +203,7 @@ akamai = {
    * as an object.
    */
   extractedValues(response) {
-    let pat = /^name=([^;]*); value=([^;]*).*$/;
+    let pat = /^name=([^\s]*); value=(.*?)(?:; full_location_id=[^;]*(?:; separator=[^;]*)?)?$/;
     return getResponseHeaderValues(response, "x-akamai-session-info")
       .reduce(function (vars, value) {
         if (pat.test(value)) {
